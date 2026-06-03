@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Park Seon Min (박선민)</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="시스템 보안 및 인공지능 분야의 박선민 포트폴리오. Computer Vision, 악성코드 분류 및 탐지 시스템, 머신러닝 스크래치 구현 등의 프로젝트를 확인해 보세요.">
+    <meta name="keywords" content="박선민, Park Seon Min, 포트폴리오, 시스템 보안, 악성코드 탐지, AI Engineer, CV, Resume">
+
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================== */
+        :root {
+            /* Secure Console Theme (Default) */
+            --bg-primary: #050a15;
+            --bg-secondary: #0c1224;
+            --bg-tertiary: #141f38;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
+
+            --accent-gradient: linear-gradient(135deg, #00f0ff 0%, #10b981 100%);
+            --accent-solid: #10b981;
+            --accent-light: rgba(16, 185, 129, 0.1);
+            --accent-glow: rgba(16, 185, 129, 0.25);
+
+            --badge-expert-bg: rgba(16, 185, 129, 0.12);
+            --badge-expert-color: #34d399;
+            --badge-expert-border: rgba(16, 185, 129, 0.3);
+
+            --badge-inter-bg: rgba(0, 240, 255, 0.08);
+            --badge-inter-color: #22d3ee;
+            --badge-inter-border: rgba(0, 240, 255, 0.25);
+
+            --badge-basic-bg: rgba(255, 255, 255, 0.04);
+            --badge-basic-color: #94a3b8;
+            --badge-basic-border: rgba(255, 255, 255, 0.1);
+
+            --border-color: rgba(0, 240, 255, 0.1);
+            --card-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(12, 18, 36, 0.85);
+            --glass-border: rgba(0, 240, 255, 0.15);
+
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="light"] {
+            /* Tactical Matrix Theme (Neon Green & Amber) */
+            --bg-primary: #020c05;
+            --bg-secondary: #051608;
+            --bg-tertiary: #08250f;
+            --text-primary: #39ff14;
+            --text-secondary: #22c55e;
+            --text-muted: #166534;
+
+            --accent-gradient: linear-gradient(135deg, #39ff14 0%, #eab308 100%);
+            --accent-solid: #39ff14;
+            --accent-light: rgba(57, 255, 20, 0.1);
+            --accent-glow: rgba(57, 255, 20, 0.3);
+
+            --badge-expert-bg: rgba(234, 179, 8, 0.12);
+            --badge-expert-color: #facc15;
+            --badge-expert-border: rgba(234, 179, 8, 0.3);
+
+            --badge-inter-bg: rgba(57, 255, 20, 0.08);
+            --badge-inter-color: #4ade80;
+            --badge-inter-border: rgba(57, 255, 20, 0.25);
+
+            --badge-basic-bg: rgba(22, 101, 52, 0.1);
+            --badge-basic-color: #86efac;
+            --badge-basic-border: rgba(22, 101, 52, 0.25);
+
+            --border-color: rgba(57, 255, 20, 0.15);
+            --card-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.8);
+            --glass-bg: rgba(5, 22, 8, 0.85);
+            --glass-border: rgba(57, 255, 20, 0.2);
+        }
+
+        /* ==========================================
+           2. BASE STYLES & LAYOUT
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            background-image:
+                radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background-color var(--transition-speed), color var(--transition-speed), background-image var(--transition-speed);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        a {
+            color: var(--accent-solid);
+            text-decoration: none;
+            transition: color 0.2s, opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.9;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .mono-text {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* ==========================================
+           3. FLOATING HEADER & NAV
+           ========================================== */
+        header.nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: background var(--transition-speed);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background-color: var(--accent-light);
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            transition: background var(--transition-speed), border-color var(--transition-speed), transform 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-solid);
+        }
+
+        /* ==========================================
+           4. MAIN HERO SECTION
+           ========================================== */
+        .hero {
+            position: relative;
+            padding: 160px 20px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at top, var(--accent-light) 0%, transparent 60%);
+            min-height: 90vh;
+            overflow: hidden;
+        }
+
+        .security-radar-sweep {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, var(--accent-light) 50%, transparent 100%);
+            opacity: 0.12;
+            pointer-events: none;
+            animation: radar-sweep 8s linear infinite;
+        }
+
+        @keyframes radar-sweep {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .security-badge-terminal {
+            font-size: 0.78rem;
+            color: var(--accent-solid);
+            background: var(--accent-light);
+            border: 1px solid var(--border-color);
+            padding: 5px 14px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.08em;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-solid);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-dot-anim 1.5s infinite;
+        }
+
+        @keyframes pulse-dot-anim {
+            0% {
+                transform: scale(0.85);
+                box-shadow: 0 0 0 0 var(--accent-glow);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(0.85);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .ko-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: -8px;
+            margin-bottom: 22px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+        }
+
+        .hero-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            box-shadow: 0 0 30px var(--accent-glow);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 20px var(--accent-glow);
+            }
+
+            100% {
+                box-shadow: 0 0 40px var(--accent-glow);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            min-height: 35px;
+        }
+
+        /* Typing effect element */
+        .typing-text::after {
+            content: '|';
+            animation: blink 0.8s infinite;
+            color: var(--accent-solid);
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'Fira Code', monospace;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .hero-tag:hover {
+            border-color: var(--accent-solid);
+            box-shadow: 0 0 8px var(--accent-glow);
+            color: var(--accent-solid);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .console-divider {
+            text-align: center;
+            color: var(--border-color);
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            margin: 40px auto 20px;
+            max-width: 900px;
+            padding: 0 20px;
+            user-select: none;
+            opacity: 0.5;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .console-divider::before,
+        .console-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        /* ==========================================
+           5. CONTENT ARCHITECTURE (SECTIONS)
+           ========================================== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+        }
+
+        section {
+            padding: 80px 0 20px;
+            scroll-margin-top: 70px;
+        }
+
+        .section-header {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 1.85rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 i {
+            color: var(--accent-solid);
+            font-size: 1.5rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-solid);
+            border-radius: 4px;
+            padding: 35px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-solid);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+        }
+
+        /* ==========================================
+           SECTION 1. ABOUT ME
+           ========================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 2fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .about-image-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+        }
+
+        .about-bio p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .about-bio p strong {
+            color: var(--text-primary);
+        }
+
+        .quick-facts {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .fact-item i {
+            color: var(--accent-solid);
+            font-size: 1.15rem;
+            margin-top: 3px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .fact-text div:first-child {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .fact-text div:last-child {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ==========================================
+           SECTION 2. EDUCATION
+           ========================================== */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            left: -28px;
+            top: 4px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-solid);
+            z-index: 1;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .edu-title {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .edu-school {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .timeline-period {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 550;
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .timeline-detail-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-detail-list li strong {
+            color: var(--text-primary);
+            min-width: 110px;
+            display: inline-block;
+        }
+
+        .course-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .course-chip {
+            font-size: 0.8rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 3px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .gpa-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--badge-expert-bg);
+            color: var(--badge-expert-color);
+            border: 1px solid var(--badge-expert-border);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================
+           SECTION 3. SKILLS
+           ========================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .category-title {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .category-title i {
+            color: var(--accent-solid);
+        }
+
+        .skill-item {
+            margin-bottom: 16px;
+        }
+
+        .skill-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Skill Level Badges */
+        .skill-level-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .skill-level-badge.expert {
+            background: var(--badge-expert-bg);
+            color: var(--badge-expert-color);
+            border: 1px solid var(--badge-expert-border);
+        }
+
+        .skill-level-badge.intermediate {
+            background: var(--badge-inter-bg);
+            color: var(--badge-inter-color);
+            border: 1px solid var(--badge-inter-border);
+        }
+
+        .skill-level-badge.basic {
+            background: var(--badge-basic-bg);
+            color: var(--badge-basic-color);
+            border: 1px solid var(--badge-basic-border);
+        }
+
+        .learning-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.25);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        /* ==========================================
+           SECTION 4. PROJECTS
+           ========================================== */
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-solid);
+            border-radius: 4px;
+            padding: 35px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-solid);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-glow);
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .project-main-title {
+            font-size: 1.45rem;
+            color: var(--text-primary);
+        }
+
+        .project-summary {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            background: var(--bg-tertiary);
+            padding: 12px 18px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 3px dashed var(--accent-solid);
+        }
+
+        .tech-stack-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .tech-pill {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-solid);
+            background: var(--accent-light);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .project-details-grid {
+            margin-bottom: 25px;
+        }
+
+        .project-detail-row {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 0.98rem;
+        }
+
+        .project-detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-label {
+            min-width: 120px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-value {
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .project-value ul {
+            padding-left: 0;
+            margin-top: 5px;
+        }
+
+        .project-value li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 6px;
+        }
+
+        .project-value li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-solid);
+            font-weight: bold;
+        }
+
+        .project-result-box {
+            background: var(--badge-expert-bg);
+            border: 1px dashed var(--badge-expert-border);
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 5px;
+            color: var(--badge-expert-color);
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+
+        /* ==========================================
+           SECTION 5. EXPERIENCE
+           ========================================= */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .experience-card {
+            display: flex;
+            gap: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .exp-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--accent-solid);
+            flex-shrink: 0;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .exp-content {
+            flex: 1;
+        }
+
+        .exp-title {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .exp-desc {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+        }
+
+        /* ==========================================
+           SECTION 6. CV / RESUME PDF
+           ========================================== */
+        .cv-card {
+            text-align: center;
+            padding: 45px 35px;
+        }
+
+        .cv-card p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .security-warning-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: rgba(239, 68, 68, 0.06);
+            border-left: 4px solid #ef4444;
+            padding: 15px 20px;
+            border-radius: 6px;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            text-align: left;
+        }
+
+        .security-warning-box i {
+            color: #ef4444;
+            font-size: 1.25rem;
+            margin-top: 2px;
+        }
+
+        .security-warning-box span {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .security-warning-box strong {
+            color: var(--text-primary);
+        }
+
+        .cv-download-btn {
+            padding: 14px 35px;
+            font-size: 1rem;
+        }
+
+        /* ==========================================
+           SECTION 7. CONTACT
+           ========================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-solid);
+            box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.15);
+        }
+
+        .contact-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent-solid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin: 0 auto 15px;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .contact-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .contact-value {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            word-break: break-all;
+        }
+
+        /* Clipboard Copy Alert Style */
+        .copy-tooltip {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            border-radius: 4px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .contact-card.show-tooltip .copy-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ==========================================
+           SECTION 8. CAREER GOALS
+           ========================================== */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .goal-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .goal-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .goal-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .goal-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           8. FOOTER
+           ========================================== */
+        footer.main-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: background var(--transition-speed);
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .footer-copyright {
+            margin-bottom: 15px;
+        }
+
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent-solid);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           9. RESPONSIVE MEDIA QUERIES
+           ========================================== */
+        @media (max-width: 850px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .about-image {
+                max-width: 320px;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .goals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                /* Mobile Menu simplification */
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .project-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-period {
+                align-self: flex-start;
+            }
+
+            .project-period {
+                align-self: flex-start;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+       A. FLOATING NAVIGATION BAR
+       ========================================== -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <a href="#" class="nav-logo mono-text"><i class="fa-solid fa-terminal"></i> PSM://SECURE_NODE</a>
+            <nav class="nav-links">
+                <a href="#about" class="active">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#cv">CV</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Console/Tactical Mode">
+                <i class="fa-solid fa-terminal" style="display: none;"></i>
+                <i class="fa-solid fa-shield-halved"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==========================================
+       B. MAIN HERO BANNER
+       ========================================== -->
+    <div class="hero">
+        <div class="security-radar-sweep"></div>
+        <div class="security-badge-terminal mono-text">
+            <span class="pulse-dot"></span> SECURE NETWORK NODE: ACTIVE // HOST: PSM.SEC
+        </div>
+        <div class="hero-avatar">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h1 id="user-name">Park Seon Min</h1>
+        <div class="ko-name">박선민</div>
+        <!-- Dynamic typing target element -->
+        <div class="hero-subtitle">
+            <span class="typing-text" id="typing-sub"></span>
+        </div>
+        <div class="hero-tags">
+            <span class="hero-tag"><i class="fa-solid fa-shield-halved"></i> System Security</span>
+            <span class="hero-tag"><i class="fa-solid fa-bug"></i> Malware Analysis</span>
+            <span class="hero-tag"><i class="fa-solid fa-eye"></i> Computer Vision</span>
+            <span class="hero-tag"><i class="fa-solid fa-terminal"></i> AI Scratch</span>
+        </div>
+        <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary"><i class="fa-solid fa-terminal"></i> Enter Console</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Contact Node</a>
+        </div>
+    </div>
+
+    <!-- Console Divider representing physical/visual separation -->
+    <div class="console-divider mono-text">
+        <span>[ SYSTEM SHELL ACCESS GRANTED // READY TO READ FILE ]</span>
+    </div>
+
+    <!-- ==========================================
+       C. PORTFOLIO CENTRAL CONTENT
+       ========================================== -->
+    <div class="container">
+
+        <!-- 1. 자기소개 / About Me -->
+        <section id="about">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-user-shield"></i> 1. About Me</h2>
+            </div>
+            <div class="card">
+                <div class="about-grid">
+                    <div class="about-image-box">
+                        <img src="security_illustration.png" alt="Security Shield Illustration" class="about-image">
+                    </div>
+                    <div class="about-layout">
+                        <div class="about-bio">
+                            <p>
+                                안녕하세요! 인공지능공학을 전공하며 <strong>시스템 보안가</strong> 및 <strong>악의적 AI 사용 범죄 탐지 및 분석가 (AI
+                                    프로파일러)</strong>로서, <strong>Computer Vision</strong>과 <strong>AI 기반 위협 탐지
+                                    시스템</strong>의 심도 있는 융합 연구를 지향하는 조선대학교 2학년 학부생 박선민 입니다.
+                            </p>
+                            <p>
+                                저는 단순히 완성된 API나 라이브러리를 도구로서 호출하는 것에 그치지 않고, AI 알고리즘의 원리 수준 Scratch 구현을 통해 시스템과 모델 레벨의
+                                취약점을 근본적으로 진단하고자 합니다. 특히 최근 심화되는 생성형 AI 공격 및 데이터 보안 이슈에 선제 대응하는 보안 시스템 구축에 몰두하고 있습니다.
+                            </p>
+                            <p>
+                                신뢰성 높은 지능형 보안 체계를 개발하여 실무 환경의 위협에 적극적으로 대응하는 <strong>AI 서비스 개발자</strong>이자 <strong>전문 AI
+                                    프로파일러</strong>로 거듭나는 것을 주도적인 목표로 두고 있습니다.
+                            </p>
+                        </div>
+                        <div class="quick-facts">
+                            <div class="fact-item">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <div class="fact-text">
+                                    <div>전공</div>
+                                    <div>인공지능공학 전공</div>
+                                </div>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fa-solid fa-microchip"></i>
+                                <div class="fact-text">
+                                    <div>관심 분야</div>
+                                    <div>System Security, AI Profiling (Malicious AI Detection), Computer Vision</div>
+                                </div>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fa-solid fa-bullseye"></i>
+                                <div class="fact-text">
+                                    <div>진로 목표</div>
+                                    <div>System Security Specialist / AI Profiler</div>
+                                </div>
+                            </div>
+                            <div class="fact-item">
+                                <i class="fa-solid fa-book-open"></i>
+                                <div class="fact-text">
+                                    <div>현재 학습 중인 기술</div>
+                                    <div>운영체제 시스템의 이해, PyTorch 기반 기술 이해, 머신러닝,딥러닝의 이해</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Education -->
+        <section id="education">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-microchip"></i> 2. Education</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="edu-title">조선대학교 (Chosun University)</h3>
+                                <div class="edu-school">인공지능공학과 (Department of Artificial Intelligence Engineering)
+                                </div>
+                            </div>
+                            <span class="timeline-period">2023.03 ~ 현재 (2학년 재학)</span>
+                        </div>
+                        <ul class="timeline-detail-list">
+                            <li>
+                                <strong>주요 수강 과목</strong>
+                                <div class="course-chips">
+                                    <span class="course-chip">Machine Learning</span>
+                                    <span class="course-chip">Deep Learning</span>
+                                    <span class="course-chip">Data Structures</span>
+                                    <span class="course-chip">OSS</span>
+                                    <span class="course-chip">System Programming</span>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Academic Score</strong>
+                                <span class="gpa-tag"><i class="fa-solid fa-award"></i> GPA: 3.7 / 4.5</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills -->
+        <section id="skills">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-key"></i> 3. Skills</h2>
+            </div>
+            <div class="skills-grid">
+
+                <!-- Programming Category -->
+                <div class="skill-category">
+                    <h3 class="category-title"><i class="fa-solid fa-code"></i> Programming Languages</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-level-badge expert">Expert</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">C / C++</span>
+                            <span class="skill-level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-level-badge basic">Basic</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="45%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI / ML Category -->
+                <div class="skill-category">
+                    <h3 class="category-title"><i class="fa-solid fa-brain"></i> AI & Machine Learning</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">PyTorch</span>
+                            <span class="skill-level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">scikit-learn</span>
+                            <span class="skill-level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">TensorFlow</span>
+                            <span class="skill-level-badge basic">Basic</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & DevOps Category -->
+                <div class="skill-category">
+                    <h3 class="category-title"><i class="fa-solid fa-toolbox"></i> Tools & DevOps</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Git / GitHub</span>
+                            <span class="skill-level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">WSL2 (Windows Subsystem for Linux)</span>
+                            <span class="skill-level-badge intermediate">Intermediate</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="60%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Docker</span>
+                            <span class="skill-level-badge basic">Basic</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="50%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Databases Category -->
+                <div class="skill-category">
+                    <h3 class="category-title"><i class="fa-solid fa-database"></i> Database Systems <span></span></h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MySQL</span>
+                            <span class="skill-level-badge basic">Basic</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="25%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">SQLite</span>
+                            <span class="skill-level-badge basic">Basic</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" data-level="20%"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. Projects -->
+        <section id="projects">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-code-branch"></i> 4. Projects</h2>
+            </div>
+            <div class="projects-container">
+
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h3 class="project-main-title">Concept Drift 상황 발생 시 심층 강화학습(DRL) 기반 악성코드 분류 및 탐지 시스템</h3>
+                        <span class="timeline-period project-period">2026.04 ~ 2026.04 (1개월)</span>
+                    </div>
+                    <div class="project-summary">
+                        운영환경 내 데이터 분포 변화(Concept Drift)로 인해 학습된 탐지 모델 성능이 저하되는 문제를 극복하기 위해, 심층 강화학습(Deep Reinforcement
+                        Learning, DRL) 에이전트를 도입하여 동적인 환경 위협 요소에 실시간 자가 적응하는 지능형 악성코드 패밀리 식별 및 탐지 기법.
+                    </div>
+                    <div class="tech-stack-container">
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">PyTorch</span>
+                        <span class="tech-pill">Stable Baselines3</span>
+                        <span class="tech-pill">OpenAI Gym</span>
+                        <span class="tech-pill">PEfile</span>
+                        <span class="tech-pill">Docker Environment</span>
+                    </div>
+                    <div class="project-details-grid">
+                        <div class="project-detail-row">
+                            <span class="project-label">프로젝트 구분</span>
+                            <span class="project-value">개인 프로젝트 (1인 개발)</span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">수행 역할</span>
+                            <span class="project-value">DQN & PPO 심층 강화학습(DRL) 에이전트 상태/보상 체계 모델링, 가상 보안 시뮬레이션 환경 및 적응형
+                                학습 파이프라인 단독 설계구조 이해</span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">핵심 기능</span>
+                            <span class="project-value">
+                                <ul>
+                                    <li>가상의 악성코드 데이터 배포 시계열 이동 모델을 설계하여 인위적 Concept Drift 가상 훈련 환경 구성</li>
+                                    <li>정밀 탐지율(Detection Precision)과 오탐률(False Alarm)을 동적으로 반영하는 멀티 태스킹 다중 목적 보상 체계 고안
+                                    </li>
+                                    <li>환경 분포가 변화할 때 에이전트 가중치를 점진적/선택적으로 업데이트하여 탐색(Exploration)과 활용(Exploitation)의 완벽한
+                                        밸런싱 구현</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">수행 성과</span>
+                            <span class="project-value">
+                                <div class="project-result-box">
+                                    <i class="fa-solid fa-chart-line"></i> Concept Drift 가혹 시나리오 조건에서 기존 정적 지도학습 모델 대비
+                                    평균 18.4% 높은 탐지 정확도 방어 완수 및 단독 검증 완료
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/username/portfolio" target="_blank" class="btn btn-primary"><i
+                                class="fa-brands fa-github"></i> GitHub Repository</a>
+                        <a href="#" class="btn btn-secondary"><i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Paper Reference / Demo</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h3 class="project-main-title">Gated Expert 컨벌루전 신경망을 이용한 AI 생성 이미지 및 동영상 탐지 시스템</h3>
+                        <span class="timeline-period project-period">2026.05 ~ 2026.05 (1개월)</span>
+                    </div>
+                    <div class="project-summary">
+                        생성형 AI 모델(GAN, Stable Diffusion 계열)로 고도로 위조된 딥페이크 이미지 및 동영상의 미세한 기하학적 주파수 아티팩트 결함을 정확히 식별하기 위해,
+                        Gated Expert 컨벌루전 신경망(Gated Expert CNN) 구조를 활용한 초정밀 위조 미디어 차단 기술.
+                    </div>
+                    <div class="tech-stack-container">
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">PyTorch</span>
+                        <span class="tech-pill">OpenCV</span>
+                        <span class="tech-pill">FFmpeg</span>
+                        <span class="tech-pill">FFT (Frequency Analysis)</span>
+                        <span class="tech-pill">ResNet/GLU</span>
+                    </div>
+                    <div class="project-details-grid">
+                        <div class="project-detail-row">
+                            <span class="project-label">수행 역할</span>
+                            <span class="project-value">개인 프로젝트 / 주파수 도메인 분석 모듈 전처리 라인 이해, Gated Expert 게이팅 알고리즘
+                                이해 및 PyTorch 설계구조 이해</span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">핵심 기능</span>
+                            <span class="project-value">
+                                <ul>
+                                    <li>위조 미디어의 공간적 픽셀 경계 결함과 FFT(고속 푸리에 변환) 기반의 고주파 스펙트럼 노이즈 패턴을 각각 전담 분석하는
+                                        Spatial/Frequency Expert 구성</li>
+                                    <li>입력 이미지 특징 강도에 맞춰 최적의 Expert 가중치를 실시간 결합 및 증폭하는 Gating Network 구현</li>
+                                    <li>딥페이크 비디오 동적 탐지를 위해 비디오 프레임 간 일관성(Inter-frame Consistency)을 계산하는 3D-CNN 연계 추론 모듈
+                                        적용</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">수행 성과</span>
+                            <span class="project-value">
+                                <div class="project-result-box"
+                                    style="color: var(--accent-solid); border-color: var(--accent-glow); background: var(--accent-light);">
+                                    <i class="fa-solid fa-microscope"></i> FaceForensics++ 글로벌 벤치마크 딥페이크 셋 기준 평균 AUC
+                                    96.8% 달성, 초당 45FPS 이상의 실시간 탐지 레이턴시 고도 최적화
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> GitHub
+                            Code</a>
+                    </div>
+                </div>
+
+                <!-- Future Projects Roadmap -->
+                <div class="project-card roadmap-card" style="border-left-style: dashed;">
+                    <div class="project-card-header">
+                        <h3 class="project-main-title"><i class="fa-solid fa-map-location-dot"></i> Future Research &
+                            Project Roadmap (향후 계획)</h3>
+                    </div>
+                    <div class="project-summary"
+                        style="border-left: 3px solid var(--accent-solid); background: rgba(0, 240, 255, 0.04);">
+                        보안 위협 대응 및 인공지능 기술의 고도 융합을 위해 연구·구축을 준비 중인 핵심 프로젝트 리스트입니다.
+                    </div>
+                    <div class="project-details-grid">
+                        <div class="project-detail-row">
+                            <span class="project-label">01. AI 모델 진단</span>
+                            <span class="project-value">
+                                <strong>AI 모델 취약점 진단 및 방어 자동화 파이프라인 구축</strong>
+                                <ul>
+                                    <li>적대적 공격(Adversarial Attacks) 및 모델 탈취 등 AI 시스템 대상 위협을 모의 시뮬레이션하고 방어 코드를 자동 주입하는 자동
+                                        진단 프레임워크 연구</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">02. LLM 범죄 대응</span>
+                            <span class="project-value">
+                                <strong>LLM 악용 사이버 범죄(생성형 피싱 공격) 역추적 및 탐지</strong>
+                                <ul>
+                                    <li>거대언어모델(LLM)에 의해 고도로 다변화된 생성형 피싱 및 사회공학적 공격 패턴을 차단하고, 공격에 활용된 AI 출처 모델을 프로파일링 및
+                                        추적</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <div class="project-detail-row">
+                            <span class="project-label">03. MLOps 무결성</span>
+                            <span class="project-value">
+                                <strong>MLOps 파이프라인 내 데이터 오염 정밀 탐지 시스템 구축</strong>
+                                <ul>
+                                    <li>지속적 학습(Continuous Learning) 시 유입될 수 있는 독성 데이터(Data Poisoning) 및 오염 샘플을 실시간
+                                        탐색·여과하는 데이터 무결성 보장 솔루션</li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Experience -->
+        <section id="experience">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-server"></i> 5. Experience</h2>
+            </div>
+            <div class="experience-list">
+
+                <div class="experience-card">
+                    <div class="exp-icon-box">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <div class="exp-content">
+                        <h3 class="exp-title">컴퓨터 비전 및 보안 학부생 (Undergraduate Sophomore Student)</h3>
+                        <p class="exp-desc">
+                            조선대학교 인공지능공학과 학부생으로서 이미지 파싱 및 분석 AI 모델 조사 및 악성코드 클래스 세부 사상 기술에 관한 선행 해외 학회 논문 조사.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-icon-box">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <div class="exp-content">
+                        <h3 class="exp-title">온라인 학습 / 소모임 활동</h3>
+                        <p class="exp-desc">
+                            정기적인 알고리즘(백준 / Online Judge 플랫폼 등) 풀이 및 문제 해결 아이디어를 개진하고 시간/공간 복잡도를 최소화하기 알고리즘
+                            정밀 분석.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-icon-box">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <div class="exp-content">
+                        <h3 class="exp-title">종합 캡스톤 디자인 챌린지 팀 프로젝트 계획</h3>
+                        <p class="exp-desc">
+                            인공지능 실시간 객체 인식 및 디바이스 제어 반응형 웹 서비스의 인프라 및 핵심 파트 개발에 참여하고 웹프로그래밍 모델의 연동과 추론 피드백 속도 최적화 프로젝트
+                            참여 희망.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. CV / Resume PDF 링크 -->
+        <section id="cv">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-file-shield"></i> 6. CV / Resume</h2>
+            </div>
+            <div class="card cv-card">
+                <p>
+                    저의 세부적인 기술 이력과 역량이 체계적으로 정리된 이력서(PDF) 다운로드를 제공합니다. 학업 성취와 추가 활동에 관한 유용한 요약본을 담고 있습니다.
+                </p>
+                <div class="security-warning-box">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>
+                        <strong>개인정보 안심 배포 안내:</strong> 본 포트폴리오 사이트와 링크된 이력서 PDF 파일에는 주민등록번호, 정밀 거주지 상세 주소, 유선 전화번호 등
+                        <strong>민감한 고유 식별 정보가 안전하게 제거(Masking/외재화)</strong>되어 있습니다. 안심하고 안전하게 다운로드하실 수 있습니다.
+                    </span>
+                </div>
+                <a href="./resume.pdf" class="btn btn-primary cv-download-btn" download>
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Download My Resume (PDF)
+                </a>
+            </div>
+        </section>
+
+        <!-- 7. Contact -->
+        <section id="contact">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-paper-plane"></i> 7. Contact</h2>
+            </div>
+            <div class="contact-grid">
+
+                <!-- Card 1: Email -->
+                <div class="contact-card" id="email-card" onclick="copyText('parkseonmin@google.com', this)">
+                    <div class="contact-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">parkseonmin@google.com</div>
+                    <div class="copy-tooltip">클립보드에 복사되었습니다!</div>
+                </div>
+
+                <!-- Card 2: GitHub -->
+                <a href="https://github.com/smpark-sudo" target="_blank" class="contact-card"
+                    style="display: block; color: inherit;">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <div class="contact-label">GitHub</div>
+                    <div class="contact-value">https://github.com/smpark-sudo</div>
+                </a>
+
+                <!-- Card 3: Blog / Notion -->
+                <a href="#" target="_blank" class="contact-card" style="display: block; color: inherit;">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-blog"></i>
+                    </div>
+                    <div class="contact-label">Tech Blog / Notion</div>
+                    <div class="contact-value">Notion & Velog 링크</div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 8. Career Goal / Future Plan -->
+        <section id="career-goal">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-crosshairs"></i> 8. Career Goal</h2>
+            </div>
+            <div class="goals-grid">
+
+                <div class="goal-card">
+                    <div class="goal-number">01</div>
+                    <h3 class="goal-title">Computer Vision Engineer</h3>
+                    <p class="goal-desc">
+                        제조 공정 검사, 의료 분석, 실시간 탐지 분야 등 다양한 산업 현장의 난제들을 지능형 시각 분석 인공신경망으로 속도와 성능을 모두 충족하며 해결하는 하이엔드 엔지니어.
+                    </p>
+                </div>
+
+                <div class="goal-card">
+                    <div class="goal-number">02</div>
+                    <h3 class="goal-title">AI Profiler & Malware Analyst</h3>
+                    <p class="goal-desc">
+                        악의적으로 오용되는 생성형 AI 공격(Deepfake, 생성형 피싱 등) 및 변종 악성 위협을 탐지·프로파일링하고, 선제적 AI 차단 지형을 마련하는 융합 보안 구심점.
+                    </p>
+                </div>
+
+                <div class="goal-card">
+                    <div class="goal-number">03</div>
+                    <h3 class="goal-title">Graduate School Research</h3>
+                    <p class="goal-desc">
+                        합성곱 연산의 기하학적 성질 및 대조 학습(Contrastive Learning)에 관한 이론적 완성도를 높이고, 인공신경망의 고도화 연구를 수행하기 위한 상위 대학원 연구
+                        트랙 고려 및 준비.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ==========================================
+       D. FOOTER
+       ========================================== -->
+    <footer class="main-footer">
+        <div class="footer-logo mono-text">Park Seon Min | Security Analyst Node</div>
+        <div class="footer-copyright mono-text">
+            © 2026 Park Seon Min. Access Verified. Powered by GitHub Pages. All Rights Reserved.
+        </div>
+        <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            <i class="fa-solid fa-chevron-up"></i> Back to top
+        </div>
+    </footer>
+
+    <!-- ==========================================
+       E. INTERACTIVE VANILLA JAVASCRIPT
+       ========================================== */ -->
+    <script>
+        /* ----------------------------------------------------
+           1. DARK & LIGHT THEME TOGGLE WITH LOCAL STORAGE
+           ---------------------------------------------------- */
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const terminalIcon = themeToggleBtn.querySelector('.fa-terminal');
+        const secureIcon = themeToggleBtn.querySelector('.fa-shield-halved');
+
+        // Check for saved theme preference, otherwise use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        setTheme(initialTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+
+            if (theme === 'light') {
+                secureIcon.style.display = 'block';
+                terminalIcon.style.display = 'none';
+            } else {
+                secureIcon.style.display = 'none';
+                terminalIcon.style.display = 'block';
+            }
+        }
+
+        /* ----------------------------------------------------
+           2. TYPING EFFECT IN HERO SECTION
+           ---------------------------------------------------- */
+        const typingElement = document.getElementById('typing-sub');
+        const phrases = [
+            "System Security Specialist & AI Profiler",
+            "Malicious AI Crime Detection & Threat Analysis",
+            "AI-Driven Malware Classification & Forensics",
+            "Computer Vision Engineer",
+            "Analyzing system vulnerabilities and building intelligent defense models."
+        ];
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 70;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 35; // Deleting is faster
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 75; // Typing speed
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typingSpeed = 2000; // Pause at full phrase
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 500; // Pause before typing next phrase
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        // Start typing loop
+        setTimeout(type, 1000);
+
+        /* ----------------------------------------------------
+           3. INTERSECTION OBSERVER FOR SKILLS PROGRESS BARS
+           ---------------------------------------------------- */
+        const progressBars = document.querySelectorAll('.progress-bar');
+
+        const barObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const level = bar.getAttribute('data-level');
+                    bar.style.width = level;
+                    observer.unobserve(bar); // Animate only once
+                }
+            });
+        }, { threshold: 0.1 });
+
+        progressBars.forEach(bar => {
+            barObserver.observe(bar);
+        });
+
+        /* ----------------------------------------------------
+           4. NAV SCROLL ACTIVE LINK HIGH-LIGHTER
+           ---------------------------------------------------- */
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section, .hero');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                // Account for floating header height
+                if (pageYOffset >= (sectionTop - 85)) {
+                    current = section.getAttribute('id') || '';
+                }
+            });
+
+            if (pageYOffset < 150) {
+                current = 'about'; // Hero top defaults to about highlighted in this setup
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        /* ----------------------------------------------------
+           5. CONTACT CARD COPY TO CLIPBOARD FUNCTION
+           ---------------------------------------------------- */
+        function copyText(text, cardElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                cardElement.classList.add('show-tooltip');
+                setTimeout(() => {
+                    cardElement.classList.remove('show-tooltip');
+                }, 2000);
+            }).catch(err => {
+                console.error('클립보드 복사 실패: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
