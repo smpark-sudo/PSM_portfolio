@@ -1,2 +1,2 @@
-# smpark-sudo.github.io
-CV&amp;HTML
+# Seon Min Park - Portfolio
+CV PDF&amp;HTML
